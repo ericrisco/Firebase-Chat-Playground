@@ -19,7 +19,6 @@ extension ChatViewController: MessagesDataSource {
         return self.messages.count
     }
     
-    
     func fetchMessages() {
         
         let manager = MessageInteractor.init(manager: MessageDummy.init(discussion: self.actualDiscussion)).manager
