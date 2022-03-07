@@ -9,5 +9,6 @@ target 'ChatKeepcoding' do
   pod 'Firebase/Analytics'
   pod 'Firebase/Auth'
   pod 'FirebaseUI/Auth'
+  pod 'Firebase/Database'
 
 end
