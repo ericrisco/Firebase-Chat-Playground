@@ -53,6 +53,8 @@
 		8594A36D27D7E88A0020E842 /* Message+Firestore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8594A36C27D7E88A0020E842 /* Message+Firestore.swift */; };
 		8594A36F27D7ECA20020E842 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8594A36E27D7ECA20020E842 /* GoogleService-Info.plist */; };
 		8594A37127D7F45D0020E842 /* UploadFirebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8594A37027D7F45D0020E842 /* UploadFirebase.swift */; };
+		8594A37327DA91370020E842 /* AppDelegate+Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8594A37227DA91360020E842 /* AppDelegate+Notification.swift */; };
+		8594A37527DAA21E0020E842 /* LogFirebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8594A37427DAA21C0020E842 /* LogFirebase.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -105,6 +107,8 @@
 		8594A36C27D7E88A0020E842 /* Message+Firestore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Message+Firestore.swift"; sourceTree = "<group>"; };
 		8594A36E27D7ECA20020E842 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../../Documents/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8594A37027D7F45D0020E842 /* UploadFirebase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadFirebase.swift; sourceTree = "<group>"; };
+		8594A37227DA91360020E842 /* AppDelegate+Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDelegate+Notification.swift"; sourceTree = "<group>"; };
+		8594A37427DAA21C0020E842 /* LogFirebase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogFirebase.swift; sourceTree = "<group>"; };
 		C1E291E04CA32BCFC6017B63 /* Pods-ChatKeepcoding.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChatKeepcoding.release.xcconfig"; path = "Target Support Files/Pods-ChatKeepcoding/Pods-ChatKeepcoding.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -183,6 +187,7 @@
 			isa = PBXGroup;
 			children = (
 				33845AA6206304B400800A99 /* AppDelegate.swift */,
+				8594A37227DA91360020E842 /* AppDelegate+Notification.swift */,
 			);
 			path = ApplicationDelegate;
 			sourceTree = "<group>";
@@ -315,6 +320,7 @@
 				8594A35B27D6B6F20020E842 /* DiscussionFirebase.swift */,
 				8594A36427D7DB220020E842 /* MessageFirebase.swift */,
 				8594A37027D7F45D0020E842 /* UploadFirebase.swift */,
+				8594A37427DAA21C0020E842 /* LogFirebase.swift */,
 			);
 			path = FirebaseImplementation;
 			sourceTree = "<group>";
@@ -364,7 +370,7 @@
 				33845AA0206304B400800A99 /* Frameworks */,
 				33845AA1206304B400800A99 /* Resources */,
 				A0A7BEE4A60EE5EEDFD1DCA7 /* [CP] Embed Pods Frameworks */,
-				85D584B824A6A22A00C01AEB /* ShellScript */,
+				8594A37627DAA9560020E842 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -424,7 +430,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		85D584B824A6A22A00C01AEB /* ShellScript */ = {
+		8594A37627DAA9560020E842 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -432,6 +438,8 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
+				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Resources/DWARF/${TARGET_NAME}\n",
+				"$(SRCROOT)/$(BUILT_PRODUCTS_DIR)/$(INFOPLIST_PATH)",
 			);
 			outputFileListPaths = (
 			);
@@ -439,7 +447,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n";
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"${BUILD_DIR%/Build/*}/SourcePackages/checkouts/firebase-ios-sdk/Crashlytics/run\"\n";
 		};
 		A0A7BEE4A60EE5EEDFD1DCA7 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -456,6 +464,7 @@
 				"${BUILT_PRODUCTS_DIR}/FirebaseDatabase/FirebaseDatabase.framework",
 				"${BUILT_PRODUCTS_DIR}/FirebaseFirestore/FirebaseFirestore.framework",
 				"${BUILT_PRODUCTS_DIR}/FirebaseInstallations/FirebaseInstallations.framework",
+				"${BUILT_PRODUCTS_DIR}/FirebaseMessaging/FirebaseMessaging.framework",
 				"${BUILT_PRODUCTS_DIR}/FirebaseStorage/FirebaseStorage.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleDataTransport/GoogleDataTransport.framework",
@@ -480,6 +489,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseDatabase.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseFirestore.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseInstallations.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseMessaging.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseStorage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleDataTransport.framework",
@@ -543,6 +553,7 @@
 				33845AD220630A9A00800A99 /* DiscussionDummy.swift in Sources */,
 				33845B68206DA84D00800A99 /* DiscussionsViewController+Table.swift in Sources */,
 				338BCB4220725D66004303F7 /* LogInteractor.swift in Sources */,
+				8594A37527DAA21E0020E842 /* LogFirebase.swift in Sources */,
 				338BCB4420725D81004303F7 /* LogManager.swift in Sources */,
 				8594A35C27D6B6F20020E842 /* DiscussionFirebase.swift in Sources */,
 				854F4072249FE3930060E1E8 /* ImageMediaItem.swift in Sources */,
@@ -561,6 +572,7 @@
 				33845B05206B114300800A99 /* ChatViewController+DataSource.swift in Sources */,
 				33845B12206B142A00800A99 /* MessageDummy.swift in Sources */,
 				33845B0B206B126A00800A99 /* Message.swift in Sources */,
+				8594A37327DA91370020E842 /* AppDelegate+Notification.swift in Sources */,
 				33845B0F206B13E500800A99 /* MessageManager.swift in Sources */,
 				33845ADD2063150B00800A99 /* DiscussionCell.swift in Sources */,
 				8594A37127D7F45D0020E842 /* UploadFirebase.swift in Sources */,
@@ -712,6 +724,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 42UB6JE5FK;
 				INFOPLIST_FILE = "$(SRCROOT)/ChatKeepcoding/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
