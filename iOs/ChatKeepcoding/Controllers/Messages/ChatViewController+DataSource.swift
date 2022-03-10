@@ -8,6 +8,7 @@
 
 import Foundation
 import MessageKit
+import Kingfisher
 
 extension ChatViewController: MessagesDataSource {
     
@@ -21,14 +22,48 @@ extension ChatViewController: MessagesDataSource {
     
     func fetchMessages() {
         
-        let manager = MessageInteractor.init(manager: MessageDummy.init(discussion: self.actualDiscussion)).manager
+        let manager = MessageInteractor.init(manager: MessageFirestore.init(discussion: self.actualDiscussion)).manager
         
         manager.list(onSuccess: { (messages) in
             self.messages = messages
+            self.downloadImages(array: messages)
             self.messagesCollectionView.reloadData()
             self.messagesCollectionView.scrollToBottom()
         }) { (error) in
             print(error)
+        }
+        
+    }
+    
+    func downloadImages(array: [Message]){
+        
+        for(index, message) in array.enumerated(){
+            
+            switch message.kind {
+            case.photo:
+            
+                let url = URL.init(string: message.value)!
+                
+                let image = UIImageView()
+                
+                image.kf.setImage(with: url, placeholder: nil, options: nil, progressBlock: nil) { result in
+                    
+                    switch result {
+                    case .success(let value):
+                        let media = ImageMediaItem.init(image: value.image)
+                        message.kind = MessageKind.photo(media)
+                        self.messages[index] = message
+                        self.messagesCollectionView.reloadData()
+                    case .failure(let error):
+                        print("Job failed: \(error.localizedDescription)")
+                    }
+                    
+                }
+
+                break
+            default:break
+            }
+            
         }
         
     }
